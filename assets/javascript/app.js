@@ -30,21 +30,43 @@ function displayArtistGifs() {
       console.log(queryURL);
       //log the resulting object
       console.log(response);
-      //creates a div to hold the gifs
-      var gifDiv = $("<div class ='gif'>");
-      //stores the static image
+      console.log(response.data);
+      console.log(response.data.type); //returns undefined
 
-      //displays the static image
+      //the response looks like an array of 10 gifs + their data in object form
+      var stringyData = JSON.stringify(response);
+      console.log(stringyData);
+
+      var parsedData = JSON.parse(stringyData);
+      console.log(parsedData);
+
+      //get each gif object out of the array
+      //   for (let i = 0; i < response.length; i++) {
+      //     var eachImageResponse = response[i];
+
+      //     //creates a div to hold the gifs
+      //     var gifDiv = $("<div id='eachImageResponse'>");
+      //stores the static image
+      // var imgStatic = eachImageResponse.data.images;
+      // Creates an element to hold the static image
+      // var pOne = $("<img>").attr("src", imgStatic);
+      // //displays the static image
+      // gifDiv.append(pOne);
 
       //stores the rating data
-      var gifRating = response.data.rating;
-      //displays the rating
+      // var gifRating = eachImageResponse.data.rating;
+      // console.log(gifRating);
 
-      //stores the moving gif
+      //creates an element to hold the rating
+      //     var pTwo = $("<p>").text(gifRating);
+      //     //displays the rating
+      //     gifDiv.append(pTwo);
+      //     //stores the moving gif
 
-      //?on click function to make the image a gif
-      //puts the gifs on the page
-      $("#gif-area").append(gifDiv);
+      //     //?on click function to make the image a gif
+      //     //puts the gifs on the page
+      //     $("#gif-area").append(gifDiv);
+      //   }
     });
 }
 //function for creating buttons with artists
@@ -53,20 +75,21 @@ function renderButtons() {
   // (this is necessary otherwise we will have repeat buttons)
   $("#buttons-div").empty();
 
-  //looping through topics array
-  for (var i = 0; i < topics.length; i++) {
+  //looping through artists array
+  for (var i = 0; i < artists.length; i++) {
     //Then dynamically generating buttons for each artist in the array
     var a = $("<button>");
     // Adding a class
-    a.addClass("artist");
-    // Adding a data-attribute with a value of the topics at index i
-    a.attr("data-name", topics[i]);
-    // Providing the button's text with a value of the topics at index i
-    a.text(topics[i]);
+    a.addClass("gif");
+    // Adding a data-attribute with a value of the artist at index i
+    a.attr("data-name", artists[i]);
+    // Providing the button's text with a value of the artist at index i
+    a.text(artists[i]);
     // Adding the button to HTML
     $("#buttons-div").append(a);
   }
-  // Calling the renderButtons function at least once to display the initial list of topics
-  renderButtons();
-  console.log("it's supposed to be rendering");
 }
+//Click event listeners to elements with a class of gif
+$(document).on("click", ".gif", displayArtistGifs);
+// At the very bottom: Calling the renderButtons function to display the intial buttons
+renderButtons();
