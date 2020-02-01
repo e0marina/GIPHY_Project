@@ -16,9 +16,9 @@ function displayArtistGifs() {
   var artist = $(this).attr("data-name");
   // Here we are building the URL we need to query GIPHY's database
   var queryURL =
-    "https://api.giphy.com/v1/gifs/search?q=" +
+    "https://api.giphy.com/v1/gifs/search?api_key=AO46ZvF2PWKxb55EA1XxuXtwjegfnCH8&q=" +
     artist +
-    "&api_key=AO46ZvF2PWKxb55EA1XxuXtwjegfnCH8&limit=10";
+    "&limit=10";
 
   // Here we run our AJAX call to the GIPHY API
   $.ajax({
@@ -30,19 +30,13 @@ function displayArtistGifs() {
       console.log(queryURL);
       //log the resulting object
       console.log(response);
-      console.log(response.data);
-      console.log(response.data.type); //returns undefined
-
-      //the response looks like an array of 10 gifs + their data in object form
-      var stringyData = JSON.stringify(response);
-      console.log(stringyData);
-
-      var parsedData = JSON.parse(stringyData);
-      console.log(parsedData);
-
-      //get each gif object out of the array
-      //   for (let i = 0; i < response.length; i++) {
-      //     var eachImageResponse = response[i];
+      console.log(response.data); //array
+      console.log(response.data[0].type); //returns gif
+      const arr = response.data;
+      //some sort of for loop
+      for (let i = 0; i < arr.length; i++) {
+        const eachImageResponse = arr[i];
+      }
 
       //     //creates a div to hold the gifs
       //     var gifDiv = $("<div id='eachImageResponse'>");
