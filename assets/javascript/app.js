@@ -12,6 +12,10 @@ var artists = [
   "monet",
   "yayoi kusama"
 ];
+
+//==============================================================
+// FUNCTIONS
+//==============================================================
 function displayArtistGifs() {
   $("#gif-area").empty();
   var artist = $(this).attr("data-name");
@@ -42,7 +46,6 @@ function displayArtistGifs() {
         //creates a div to hold the gifs
         var gifDiv = $("<div id='eachImageResponse'>");
         //stores the static image
-        console.log(eachImageResponse);
         console.log(eachImageResponse.images.fixed_width_still.url);
 
         var imgStatic = eachImageResponse.images.fixed_width_still.url;
@@ -50,7 +53,11 @@ function displayArtistGifs() {
         var pOne = $("<img>").attr("src", imgStatic);
         //displays the static image
         gifDiv.append(pOne);
-
+        //stores the moving gif image to be used later
+        console.log(eachImageResponse.images.downsized_medium.url);
+        var movingGif = eachImageResponse.images.downsized_medium.url;
+        //creates an element to hold the moving image, to be used later
+        var pHalf = $("<a>").attr("href", movingGif);
         //stores the rating data
         var gifRating = eachImageResponse.rating;
         console.log(gifRating);
@@ -61,13 +68,27 @@ function displayArtistGifs() {
         gifDiv.append(pTwo);
         //stores the moving gif
         console.log(gifDiv);
-
-        //?on click function to make the image a gif
         //puts the gifs on the page
         $("#gif-area").append(gifDiv);
+        //function for making gifs animate
+        //when the static image is clicked
+        //store the particular img that was clicked
+        var clickedImg = $("#eachImageResponse").on("click", function() {
+          console.log(clickedImg); //returns 10 results
+        });
+
+        //store the particular img that was clicked
+        // var clickedDiv = gifDiv.val();
+        // console.log(clickedDiv);
+
+        // //empty that div
+        // //   clickedDiv.empty();
+        // //put the moving gif in place
+        // clickedDiv.append(pHalf);
       }
     });
 }
+
 //function for creating buttons with artists
 function renderButtons() {
   // Deleting the movie buttons prior to adding new movie buttons
@@ -79,7 +100,7 @@ function renderButtons() {
     //Then dynamically generating buttons for each artist in the array
     var a = $("<button>");
     // Adding a class
-    a.addClass("gif");
+    a.addClass("gifButton");
     // Adding a data-attribute with a value of the artist at index i
     a.attr("data-name", artists[i]);
     // Providing the button's text with a value of the artist at index i
@@ -88,7 +109,9 @@ function renderButtons() {
     $("#buttons-div").append(a);
   }
 }
+
 //Click event listeners to elements with a class of gif
-$(document).on("click", ".gif", displayArtistGifs);
+$(document).on("click", ".gifButton", displayArtistGifs);
+
 // At the very bottom: Calling the renderButtons function to display the intial buttons
 renderButtons();
