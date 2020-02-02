@@ -70,25 +70,17 @@ function displayArtistGifs() {
         console.log(gifDiv);
         //puts the gifs on the page
         $("#gif-area").append(gifDiv);
+
+        //function for making gifs animate
+        //when the static image is clicked
+        $(".indiv-gif").on("click", function() {
+          console.log(this);
+          //store the particular img that was clicked
+          var x = $(this)
+            .empty()
+            .append(pHalf); // is returning the last image in the array's gif bc on orig. click page loaded all the way and last image was in the for loop for pHalf
+        });
       }
-      //function for making gifs animate
-      //when the static image is clicked
-      //store the particular img that was clicked
-      $(".indiv-gif").on("click", function() {
-        console.log(this);
-        var clickedImg = $(this);
-        var emptiedImgSpace = clickedImg.empty();
-        emptiedImgSpace.append(pHalf);
-      });
-
-      //store the particular img that was clicked
-      // var clickedDiv = gifDiv.val();
-      // console.log(clickedDiv);
-
-      // //empty that div
-      // //   clickedDiv.empty();
-      // //put the moving gif in place
-      // clickedDiv.append(pHalf);
     });
 }
 
