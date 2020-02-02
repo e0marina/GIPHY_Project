@@ -47,17 +47,22 @@ function displayArtistGifs() {
         var gifDiv = $("<div class='indiv-gif'>");
         //stores the static image
         console.log(indivGif.images.fixed_width_still.url);
+        var movinggif = indivGif.images.downsized_medium.url;
+        //creates an element to hold the moving image, to be used later
+        // var pHalf = $("<img>").attr("src", movinggif);
 
-        var imgStatic = indivGif.images.fixed_width_still.url;
+        var imgstatic = indivGif.images.fixed_width_still.url;
         //Creates an element to hold the static image
-        var pOne = $("<img>").attr("src", imgStatic);
+        var pOne = $("<img>");
+        pOne.attr("src", imgstatic);
+        pOne.attr("movinggif", movinggif); //adding one more attribute
+        pOne.attr("imgstatic", imgstatic);
+        pOne.attr("imgstate", "still"); //have to save both vals in order to change back to still
         //displays the static image
         gifDiv.append(pOne);
         //stores the moving gif image to be used later
         console.log(indivGif.images.downsized_medium.url);
-        var movingGif = indivGif.images.downsized_medium.url;
-        //creates an element to hold the moving image, to be used later
-        var pHalf = $("<img>").attr("src", movingGif);
+
         //stores the rating data
         var gifRating = indivGif.rating;
         console.log(gifRating);
@@ -71,17 +76,32 @@ function displayArtistGifs() {
         //puts the gifs on the page
         $("#gif-area").append(gifDiv);
       }
-      //function for making gifs animate
-      //when the static image is clicked
-      $(".indiv-gif").on("click", function() {
-        console.log(this);
-        //store the particular img that was clicked
-        var x = $(this)
-          .empty()
-          .append(pHalf); // is returning the last image in the array's gif bc on orig. click page loaded all the way and last image was in the for loop for pHalf
-      });
     });
 }
+//function for making gifs animate
+//when the static image is clicked
+// $(".indiv-gif").on("click", function() {
+//   console.log(this);
+//   //store the particular img that was clicked
+//   var x = $(this);
+
+// });
+
+$(document).on("click", ".indiv-gif", function() {
+  console.log("it's working!");
+
+  var state = $(this).attr("imgstate");
+  console.log(state);
+  console.log(this);
+
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("movinggif"));
+    $(this).attr("imgstate", "animate");
+  } else {
+    $(this).attr("src", $(this).attr("imgstatic"));
+    $(this).attr("imgstate", "still");
+  }
+});
 
 //function for creating buttons with artists
 function renderButtons() {
