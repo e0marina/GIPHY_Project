@@ -12,7 +12,7 @@ var artists = [
   "monet",
   "yayoi kusama"
 ];
-
+var id;
 //==============================================================
 // FUNCTIONS
 //==============================================================
@@ -41,25 +41,25 @@ function displayArtistGifs() {
       const arr = response.data;
       //some sort of for loop
       for (let i = 0; i < arr.length; i++) {
-        const eachImageResponse = arr[i];
+        const indivGif = arr[i];
 
-        //creates a div to hold the gifs
-        var gifDiv = $("<div id='eachImageResponse'>");
+        //creates a div to hold the gif
+        var gifDiv = $("<div class='indiv-gif'>");
         //stores the static image
-        console.log(eachImageResponse.images.fixed_width_still.url);
+        console.log(indivGif.images.fixed_width_still.url);
 
-        var imgStatic = eachImageResponse.images.fixed_width_still.url;
+        var imgStatic = indivGif.images.fixed_width_still.url;
         //Creates an element to hold the static image
         var pOne = $("<img>").attr("src", imgStatic);
         //displays the static image
         gifDiv.append(pOne);
         //stores the moving gif image to be used later
-        console.log(eachImageResponse.images.downsized_medium.url);
-        var movingGif = eachImageResponse.images.downsized_medium.url;
+        console.log(indivGif.images.downsized_medium.url);
+        var movingGif = indivGif.images.downsized_medium.url;
         //creates an element to hold the moving image, to be used later
-        var pHalf = $("<a>").attr("href", movingGif);
+        var pHalf = $("<img>").attr("src", movingGif);
         //stores the rating data
-        var gifRating = eachImageResponse.rating;
+        var gifRating = indivGif.rating;
         console.log(gifRating);
 
         //creates an element to hold the rating
@@ -70,22 +70,25 @@ function displayArtistGifs() {
         console.log(gifDiv);
         //puts the gifs on the page
         $("#gif-area").append(gifDiv);
-        //function for making gifs animate
-        //when the static image is clicked
-        //store the particular img that was clicked
-        var clickedImg = $("#eachImageResponse").on("click", function() {
-          console.log(clickedImg); //returns 10 results
-        });
-
-        //store the particular img that was clicked
-        // var clickedDiv = gifDiv.val();
-        // console.log(clickedDiv);
-
-        // //empty that div
-        // //   clickedDiv.empty();
-        // //put the moving gif in place
-        // clickedDiv.append(pHalf);
       }
+      //function for making gifs animate
+      //when the static image is clicked
+      //store the particular img that was clicked
+      $(".indiv-gif").on("click", function() {
+        console.log(this);
+        var clickedImg = $(this);
+        var emptiedImgSpace = clickedImg.empty();
+        emptiedImgSpace.append(pHalf);
+      });
+
+      //store the particular img that was clicked
+      // var clickedDiv = gifDiv.val();
+      // console.log(clickedDiv);
+
+      // //empty that div
+      // //   clickedDiv.empty();
+      // //put the moving gif in place
+      // clickedDiv.append(pHalf);
     });
 }
 
