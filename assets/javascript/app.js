@@ -13,6 +13,7 @@ var artists = [
   "yayoi kusama"
 ];
 function displayArtistGifs() {
+  $("#gif-area").empty();
   var artist = $(this).attr("data-name");
   // Here we are building the URL we need to query GIPHY's database
   var queryURL =
@@ -32,35 +33,39 @@ function displayArtistGifs() {
       console.log(response);
       console.log(response.data); //array
       console.log(response.data[0].type); //returns gif
+
       const arr = response.data;
       //some sort of for loop
       for (let i = 0; i < arr.length; i++) {
         const eachImageResponse = arr[i];
+
+        //creates a div to hold the gifs
+        var gifDiv = $("<div id='eachImageResponse'>");
+        //stores the static image
+        console.log(eachImageResponse);
+        console.log(eachImageResponse.images.fixed_width_still.url);
+
+        var imgStatic = eachImageResponse.images.fixed_width_still.url;
+        //Creates an element to hold the static image
+        var pOne = $("<img>").attr("src", imgStatic);
+        //displays the static image
+        gifDiv.append(pOne);
+
+        //stores the rating data
+        var gifRating = eachImageResponse.rating;
+        console.log(gifRating);
+
+        //creates an element to hold the rating
+        var pTwo = $("<p>").text(gifRating);
+        //displays the rating
+        gifDiv.append(pTwo);
+        //stores the moving gif
+        console.log(gifDiv);
+
+        //?on click function to make the image a gif
+        //puts the gifs on the page
+        $("#gif-area").append(gifDiv);
       }
-
-      //     //creates a div to hold the gifs
-      //     var gifDiv = $("<div id='eachImageResponse'>");
-      //stores the static image
-      // var imgStatic = eachImageResponse.data.images;
-      // Creates an element to hold the static image
-      // var pOne = $("<img>").attr("src", imgStatic);
-      // //displays the static image
-      // gifDiv.append(pOne);
-
-      //stores the rating data
-      // var gifRating = eachImageResponse.data.rating;
-      // console.log(gifRating);
-
-      //creates an element to hold the rating
-      //     var pTwo = $("<p>").text(gifRating);
-      //     //displays the rating
-      //     gifDiv.append(pTwo);
-      //     //stores the moving gif
-
-      //     //?on click function to make the image a gif
-      //     //puts the gifs on the page
-      //     $("#gif-area").append(gifDiv);
-      //   }
     });
 }
 //function for creating buttons with artists
