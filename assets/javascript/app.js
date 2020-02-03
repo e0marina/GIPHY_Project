@@ -58,6 +58,7 @@ function displayArtistGifs() {
         pOne.attr("movinggif", movinggif); //adding one more attribute
         pOne.attr("imgstatic", imgstatic);
         pOne.attr("imgstate", "still"); //have to save both vals in order to change back to still
+        pOne.addClass("indiv-gif");
         //displays the static image
         gifDiv.append(pOne);
         //stores the moving gif image to be used later
