@@ -90,14 +90,6 @@ function displayArtistGifs() {
       }
     });
 }
-//function for making gifs animate
-//when the static image is clicked
-// $(".indiv-gif").on("click", function() {
-//   console.log(this);
-//   //store the particular img that was clicked
-//   var x = $(this);
-
-// });
 
 $(document).on("click", ".indiv-gif", function() {
   console.log("it's working!");
@@ -117,7 +109,7 @@ $(document).on("click", ".indiv-gif", function() {
 
 //function for creating buttons with artists
 function renderButtons() {
-  // Deleting the movie buttons prior to adding new movie buttons
+  // Deleting the artist buttons prior to adding new artist buttons
   // (this is necessary otherwise we will have repeat buttons)
   $("#buttons-div").empty();
 
@@ -135,6 +127,20 @@ function renderButtons() {
     $("#buttons-div").append(a);
   }
 }
+// This function handles events where the add artist button is clicked
+$("#add-artist").on("click", function(event) {
+  event.preventDefault();
+  // This line of code will grab the input from the textbox
+  var artist = $("#artist-input")
+    .val()
+    .trim();
+
+  // The artist from the textbox is then added to our array
+  artists.push(artist);
+
+  // Calling renderButtons which handles the processing of our artist array
+  renderButtons();
+});
 
 //Click event listeners to elements with a class of gif
 $(document).on("click", ".gifButton", displayArtistGifs);
