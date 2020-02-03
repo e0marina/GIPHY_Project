@@ -9,8 +9,19 @@ var artists = [
   "van gogh",
   "vermeer",
   "michaelangelo",
-  "monet",
-  "yayoi kusama"
+  "alice neel",
+  "yayoi kusama",
+  "salvador dali",
+  "andy warhol",
+  "gustav klimt",
+  "henri matisse",
+  "georgia o'keeffe",
+  "paul cezanne",
+  "diego rivera",
+  "francis bacon",
+  "mary cassatt",
+  "roy lichtenstein",
+  "lucian freud"
 ];
 var id;
 //==============================================================
