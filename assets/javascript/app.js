@@ -23,7 +23,7 @@ var artists = [
   "roy lichtenstein",
   "lucian freud"
 ];
-var id;
+
 //==============================================================
 // FUNCTIONS
 //==============================================================
@@ -58,7 +58,7 @@ function displayArtistGifs() {
         var gifDiv = $("<div class='indiv-gif'>");
         //stores the static image
         console.log(indivGif.images.fixed_width_still.url);
-        var movinggif = indivGif.images.downsized_medium.url;
+        var movinggif = indivGif.images.fixed_width.url;
         //creates an element to hold the moving image, to be used later
         // var pHalf = $("<img>").attr("src", movinggif);
 
@@ -73,7 +73,7 @@ function displayArtistGifs() {
         //displays the static image
         gifDiv.append(pOne);
         //stores the moving gif image to be used later
-        console.log(indivGif.images.downsized_medium.url);
+        console.log(indivGif.images.fixed_width.url);
 
         //stores the rating data
         var gifRating = indivGif.rating;
